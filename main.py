@@ -4,10 +4,18 @@ import pandas as pd
 from pycoingecko import CoinGeckoAPI
 from fastapi import FastAPI, status, HTTPException
 from fastapi.responses import Response, RedirectResponse
+from fastapi.middleware.cors import CORSMiddleware
 from typing import List, Dict
 
 cg = CoinGeckoAPI()
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['http://localhost:3000'],
+    allow_credentials=True,
+    allow_methods=['GET', 'POST', 'PUT', 'DELETE'],
+    allow_headers=['*'],
+)
 
 
 @app.get('/')
